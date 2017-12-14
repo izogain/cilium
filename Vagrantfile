@@ -31,6 +31,11 @@ chown -R vagrant:vagrant $GOPATH
 curl -SsL https://github.com/cilium/bpf-map/releases/download/v1.0/bpf-map -o bpf-map
 chmod +x bpf-map
 mv bpf-map /usr/bin
+wget https://github.com/bazelbuild/bazel/releases/download/0.8.1/bazel-0.8.1-installer-linux-x86_64.sh
+chmod +x bazel-0.8.1-installer-linux-x86_64.sh
+sudo -E ./bazel-0.8.1-installer-linux-x86_64.sh
+sudo -E mv /usr/local/bin/bazel /usr/bin
+rm bazel-0.8.1-installer-linux-x86_64.sh
 SCRIPT
 
 $envoyexport = ENV['CILIUM_USE_ENVOY'] ? "export CILIUM_USE_ENVOY=1\n" : ""
