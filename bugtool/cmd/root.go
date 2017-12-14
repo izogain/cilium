@@ -25,7 +25,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/cilium/cilium/common"
 	"github.com/cilium/cilium/daemon/defaults"
 
 	"github.com/spf13/cobra"
@@ -70,9 +69,10 @@ func init() {
 func runTool() {
 	// Search for a Cilium pod and if one is found prefix all of the
 	// commands to use the pod(s).
-	k8sPods, _ = getCiliumPods(k8sNamespace, k8sLabel)
-	if len(k8sPods) == 0 {
-		common.RequireRootPrivilege("bugtool")
+	var err error
+	k8sPods, err = getCiliumPods(k8sNamespace, k8sLabel)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "....Failed to retrieve cilium logs from kubernetes: %s\n", err)
 	}
 
 	defer printDisclaimer()
