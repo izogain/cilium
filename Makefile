@@ -108,8 +108,8 @@ tags: $(GOLANG_SRCFILES) $(BPF_SRCFILES)
 	cscope -R -b -q
 
 clean-container:
-	for i in $(SUBDIRS); do $(MAKE) -C $$i clean; done
-	for i in $(SUBDIRSLIB); do $(MAKE) -C $$i clean; done
+	-for i in $(SUBDIRS); do $(MAKE) -C $$i clean; done
+	-for i in $(SUBDIRSLIB); do $(MAKE) -C $$i clean; done
 
 clean: clean-container
 	-$(MAKE) -C ./contrib/packaging/deb clean
