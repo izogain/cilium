@@ -185,7 +185,12 @@ function install_kubeadm_dependencies(){
 deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 "
-    sudo apt-get -qq update && sudo apt-get -qq install -y apt-transport-https docker-engine
+    curl -s https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo bash -c "cat <<EOF > /etc/apt/sources.list.d/docker.list
+deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+EOF
+"
+    sudo apt-get -qq update && sudo apt-get -qq install -y apt-transport-https docker-ce
     sudo usermod -aG docker vagrant
 }
 

@@ -5,6 +5,7 @@
 Vagrant.require_version ">= 1.8.3"
 
 $build_docker_image = <<SCRIPT
+docker -v
 certs_dir="/home/vagrant/go/src/github.com/cilium/cilium/tests/k8s/cluster/certs"
 cd /home/vagrant/go/src/github.com/cilium/cilium/
 docker run -d -p 5000:5000 --name registry -v ${certs_dir}:/certs \
